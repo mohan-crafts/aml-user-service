@@ -2,11 +2,14 @@ package com.user.entity;
 
 import java.util.Date;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -21,10 +24,18 @@ public class User {
 	private String name;
 	
 	@Column(name = "user_id")
-	private String user_id;
+	private String userId;
 	
 	@Column(name = "email")
 	private String email;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="role_id", referencedColumnName = "id")
+	private Role role;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="address_id", referencedColumnName = "id")
+	private Address address;
 	
 	@Column(name = "password_hash")
 	private String password;
@@ -54,12 +65,12 @@ public class User {
 		this.name = name;
 	}
 
-	public String getUser_id() {
-		return user_id;
+	public String getUserId() {
+		return userId;
 	}
 
-	public void setUser_id(String user_id) {
-		this.user_id = user_id;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 
 	public String getEmail() {
@@ -101,4 +112,21 @@ public class User {
 	public void setUpdatedOn(Date updatedOn) {
 		this.updatedOn = updatedOn;
 	}
+	
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
+	}
+
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+
 }

@@ -32,7 +32,7 @@ public class UserController {
 		return ResponseEntity.ok(this.userService.getBookById(userID));
 	}
 	
-	@PostMapping("")
+	@PostMapping("/add")
 	public ResponseEntity<User> createUser(@RequestBody User user) {
 		return ResponseEntity.ok(this.userService.createUser(user));
 	}
